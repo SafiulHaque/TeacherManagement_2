@@ -11,92 +11,114 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.safi.TeacherManagement_2.Models.Students;
-import com.safi.TeacherManagement_2.Models.Subjects;
+import com.safi.TeacherManagement_2.Models.Student;
+import com.safi.TeacherManagement_2.Models.Subject;
 import com.safi.TeacherManagement_2.Models.Teacher;
-import com.safi.TeacherManagement_2.Services.MethodContainer;
+import com.safi.TeacherManagement_2.Services.StudentService;
+import com.safi.TeacherManagement_2.Services.SubjectService;
 import com.safi.TeacherManagement_2.Services.TeacherService;
 
 @RestController
 public class AppController {
 	@Autowired
-	MethodContainer container;
+	TeacherService teacerService;
+	
+	@Autowired
+	StudentService studentService;
+	
+	@Autowired
+	SubjectService subjectService;
 	
 //	@Autowired
 //	TeacherService service;
 	
 	@PutMapping("/addNewTeacher")
 	public Teacher addNewTeacher(@RequestBody Teacher teacher) {
-		return container.addNewTeacher(teacher);
+		return teacerService.addNewTeacher(teacher);
 	}
 	
 	@PutMapping("/addNewStudent")
-	public Students addNewStudent(@RequestBody Students student) {
-		return container.addNewStudent(student);
+	public Student addNewStudent(@RequestBody Student student) {
+		return studentService.addNewStudent(student);
 	}
 	
 	@PutMapping("/addNewSubject")
-	public Subjects addNewSubject(@RequestBody Subjects subject) {
-		return container.addNewSubject(subject);
+	public Subject addNewSubject(@RequestBody Subject subject) {
+		return subjectService.addNewSubject(subject);
 	}
 	
 	@GetMapping(value="/details/teacher/{id}")
 	public Teacher showOneTeacherDetails(@PathVariable("id") int tid) {
-		return container.showOneTeacherDetails(tid);
+		return teacerService.showOneTeacherDetails(tid);
 	}
 	
 	@GetMapping(value="/details/subject/{id}")
-	public Subjects showOneSubjectDetails(@PathVariable("id") int tid) {
-		return container.showOneSubDetails(tid);
+	public Subject showOneSubjectDetails(@PathVariable("id") int tid) {
+		return subjectService.showOneSubDetails(tid);
 	}
 	
 	@GetMapping(value="/details/student/{id}")
-	public Students showOneStudentDetails(@PathVariable("id") int tid) {
-		return container.showOneStudentDetails(tid);
+	public Student showOneStudentDetails(@PathVariable("id") int tid) {
+		return studentService.showOneStudentDetails(tid);
 	}
 	
 	@DeleteMapping(value="/removeTeacher/{id}")
 	public String removeTeacher(@PathVariable("id") int tid) {
-		return container.removeTeacher(tid);
+		return teacerService.removeTeacher(tid);
 	}
 	
 	@DeleteMapping(value="/removeStudent/{id}")
 	public String removeStudent(@PathVariable("id") int tid) {
-		return container.removeStudent(tid);
+		return studentService.removeStudent(tid);
 	}
 	
 	@DeleteMapping(value="/removeSubject/{id}")
 	public String remove(@PathVariable("id") int tid) {
-		return container.removeSubject(tid);
+		return subjectService.removeSubject(tid);
 	}
 	
 	@GetMapping(value="/teachers")
 	public List<Teacher> showAllTeachers() {
-		return container.showAllTeachers();
+		return teacerService.showAllTeachers();
 	}
 	
-	@GetMapping(value="/students")
-	public List<Students> showAllStudents() {
-		return container.showAllStudents();
+	@GetMapping(value="/student")
+	public List<Student> showAllStudents() {
+		return studentService.showAllStudents();
 	}
 	
-	@GetMapping(value="/subjects")
-	public List<Subjects> showAllSubjects() {
-		return container.showAllSubjects();
+	@GetMapping(value="/subject")
+	public List<Subject> showAllSubjects() {
+		return subjectService.showAllSubjects();
 	}
 	
 	@GetMapping(value="/teacherCount")
 	public String totalTeacherCount() {
-		return container.totalTeacherCount();
+		return teacerService.totalTeacherCount();
 	}
 	
 	@GetMapping(value="/studentCount")
 	public String totalStudentCount() {
-		return container.totalStudentsCount();
+		return studentService.totalStudentsCount();
 	}
 	
 	@GetMapping(value="/subjectCount")
 	public String totalSubjectCount() {
-		return container.totalSubjectsCount();
+		return subjectService.totalSubjectsCount();
+	}
+	
+	@PutMapping(value="/update/subject")
+	public String updateSubject(@RequestBody Subject subject) {
+		return subjectService.updateSubject(subject);
+	}
+	
+	@PutMapping(value="/update/teacher")
+	public String updateTeacher(@RequestBody Teacher teacher) {
+		return teacerService.updateTeacher(teacher);
+	}
+	
+	@PutMapping(value="/update/student")
+	public String updateStudent(@RequestBody Student student) {
+		return studentService.updateStudent(student);
 	}
 }

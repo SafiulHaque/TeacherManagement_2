@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
-public class Students {
+public class Student {
 	@Id
 	@SequenceGenerator(name="student_id_sequence",sequenceName="student_id_sequence",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="student_id_sequence")
@@ -31,12 +31,12 @@ public class Students {
 	int roll;
 	
 	
-	public Students() { super(); }
+	public Student() { super(); }
 	
 	@ManyToMany(
 	//		cascade= {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH}
-	//		,mappedBy="students",fetch=FetchType.LAZY
-			targetEntity=Subjects.class
+	//		,mappedBy="student",fetch=FetchType.LAZY
+			targetEntity=Subject.class
 			)
 //	@JoinColumn(name="students_subjects",referencedColumnName="subject_id")
 	@JoinTable(name="STUDENTS_SUBJECTS"
@@ -44,26 +44,26 @@ public class Students {
 	,inverseJoinColumns=@JoinColumn(name="subject_id",referencedColumnName="subject_id")
 	)
 	@JsonProperty(access = Access.WRITE_ONLY)
-	Set<Subjects> subjects=new HashSet<>();
+	Set<Subject> subject=new HashSet<>();
 	
 	
 	
 	
-	public Set<Subjects> getSubjects() {
-		return subjects;
+	public Set<Subject> getSubjects() {
+		return subject;
 	}
 
-	public void setSubjects(Set<Subjects> subjects) {
-		this.subjects = subjects;
+	public void setSubjects(Set<Subject> subject) {
+		this.subject = subject;
 	}
 
-	public Students(long stId, String name, int standard, int roll) { super();
+	public Student(long stId, String name, int standard, int roll) { super();
 	this.stId = stId; this.name = name; this.standard = standard; this.roll = roll;
 	}
 	
-	public Students(long stId, String name, int standard, int roll, Set<Subjects>
-	subjects) { super(); this.stId = stId; this.name = name; this.standard =
-	standard; this.roll = roll; this.subjects = subjects; }
+	public Student(long stId, String name, int standard, int roll, Set<Subject>
+	subject) { super(); this.stId = stId; this.name = name; this.standard =
+	standard; this.roll = roll; this.subject = subject; }
 	
 	
 	

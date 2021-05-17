@@ -13,7 +13,7 @@ public interface TeacherRepository extends JpaRepository<Teacher, Long> {
 	@Query(value="SELECT MAX(TID) FROM Teacher", nativeQuery = true)
 	public long getHighestId();
 	
-	public Teacher getByName(String name);
+	public Teacher getByNameOrderByDesc(String name);
 	
 	/*
 	 * @Query(value="SELECT * FROM Teacher", nativeQuery = true) public

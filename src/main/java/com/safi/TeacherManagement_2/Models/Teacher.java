@@ -35,41 +35,41 @@ public class Teacher {
 	
 	@ManyToOne
 //	(cascade=CascadeType.MERGE)
-	//(targetEntity=Subjects.class)
+	//(targetEntity=Subject.class)
 //	@JoinColumn(name="SUBJECTS_SUBJECT_ID",referencedColumnName="subject_id")
 	//(mappedBy="teachers")
-//	Set<Subjects> subjects=new HashSet<>();
+//	Set<Subject> subject=new HashSet<>();
 //	@Autowired
-	Subjects subjects;
+	Subject subject;
 	
 //	@Autowired
 //	@Transient
 //	SubjectRepository subRepo;
 	
 	/*
-	 * public Teacher(long tid, String name, int age, String subject, Set<Subjects>
-	 * subjects) { super(); this.tid = tid; this.name = name; this.age = age;
-	 * this.subject = subject; this.subjects = subjects; } public Teacher() {
+	 * public Teacher(long tid, String name, int age, String subject, Set<Subject>
+	 * subject) { super(); this.tid = tid; this.name = name; this.age = age;
+	 * this.subject = subject; this.subjects = subject; } public Teacher() {
 	 * super(); } public Teacher(int tid, String name, int age, String subject) {
 	 * super(); this.tid = tid; this.name = name; this.age = age; this.subject
 	 * =subject; }
 	 */
 	
 	public 
-//	Set<Subjects> 
-	Subjects
+//	Set<Subject> 
+	Subject
 	getSubjects() {
-		return subjects;
+		return subject;
 	}
 	public void setSubjects(
-		//	Set<Subjects>
-			Subjects
-			subjects
+		//	Set<Subject>
+			Subject
+			subject
 		//	long id
 			) {
-	//	long id=subjects.getSubId();
-		this.subjects = subjects;
-	//	Subjects sub=subRepo.getOne(id);
+	//	long id=subject.getSubId();
+		this.subject = subject;
+	//	Subject sub=subRepo.getOne(id);
 	//	this.subjects=sub;
 	}
 	
@@ -102,6 +102,6 @@ public class Teacher {
 	
 	@Override
 	public String toString() {
-		return "Teacher [tid=" + tid + ", name=" + name + ", age=" + age + ", subject=" + subjects + "]";
+		return "Teacher [tid=" + tid + ", name=" + name + ", age=" + age + ", subject=" + subject + "]";
 	}
 }

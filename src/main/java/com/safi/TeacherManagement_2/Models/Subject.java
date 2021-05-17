@@ -20,7 +20,7 @@ import javax.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Subjects {
+public class Subject {
 	@Id
 	@SequenceGenerator(name="subject_id_sequence",sequenceName="subject_id_sequence",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="subject_id_sequence")
@@ -32,17 +32,17 @@ public class Subjects {
 	@ManyToMany(
 			//fetch=FetchType.LAZY
 		//	cascade= {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},
-			targetEntity=Students.class
+			targetEntity=Student.class
 			)
 	@JoinTable(name="STUDENTS_SUBJECTS"
 //	,referencedColumnName="stId"
 	,joinColumns=@JoinColumn(name="subject_id",referencedColumnName="subject_id")
 	,inverseJoinColumns=@JoinColumn(name="student_id",referencedColumnName="student_id")
 	)
-	Set<Students> students=new HashSet<>();
+	Set<Student> student=new HashSet<>();
 	
-	@OneToMany(mappedBy="subjects",fetch=FetchType.LAZY)
-//	(targetEntity=Teacher.class,mappedBy="subjects",cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="subject",fetch=FetchType.LAZY)
+//	(targetEntity=Teacher.class,mappedBy="subject",cascade=CascadeType.ALL)
 //	@JoinColumn(referencedColumnName="teacher_id")
 //	@Transient
 	@JsonIgnore
@@ -51,11 +51,11 @@ public class Subjects {
 	public Set<Teacher> getTeachers() { return teachers; } 
 	public void setTeachers(Set<Teacher> teachers) { this.teachers = teachers; }
 	
-	public Set<Students> getStudents() {
-		return students;
+	public Set<Student> getStudents() {
+		return student;
 	}
-	public void setStudents(Set<Students> students) {
-		this.students = students;
+	public void setStudents(Set<Student> student) {
+		this.student = student;
 	}
 
 	/*
